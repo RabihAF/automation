@@ -1,0 +1,21 @@
+# deemix 
+version: '3.3'
+
+services:
+  deemix:
+    image: registry.gitlab.com/bockiii/deemix-docker
+    container_name: deemix
+    environment:
+      - "PUID=${USER_ID}"
+      - "PGID=${GROUP_ID}"
+      - "ARL=${DEEMIX_ARL}"
+      - "FILE__PASSWORD=${TARGET_DIR}/secrets/password"
+    volumes:
+      - "${TARGET_DIR}/config/deemix:/config"
+      - "${TARGET_DIR}/downloads:/downloads"
+    ports:
+      - 6595:6595
+    restart: always
+    networks:
+        - music
+        

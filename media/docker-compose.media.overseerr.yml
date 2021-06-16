@@ -1,0 +1,23 @@
+# Overseerr is a free and open source software application for managing requests for your media library.
+version: '3.3'
+
+services:
+  overseerr:
+    image: ghcr.io/linuxserver/overseerr
+    container_name: overseerr
+    depends_on:
+      - "radarr"
+      - "sonarr"
+      - "plex"
+    environment:
+      - "PUID=${USER_ID}"
+      - "PGID=${GROUP_ID}"
+      - TZ=Europe/London
+      - "FILE__PASSWORD=${TARGET_DIR}/secrets/password"
+    volumes:
+      - "${TARGET_DIR}/config/overseerr:/config"
+    ports:
+      - 5055:5055
+    restart: always
+    networks:
+        - media

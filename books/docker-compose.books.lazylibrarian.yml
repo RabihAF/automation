@@ -1,0 +1,23 @@
+# Lazylibrarian is a program to follow authors and grab metadata for all your digital reading needs. 
+# It uses a combination of Goodreads Librarything and optionally GoogleBooks as sources for author info and book info. 
+# This container is based on the DobyTang fork. 
+version: '3.3'
+
+services:
+  lazylibrarian:
+    image: ghcr.io/linuxserver/lazylibrarian
+    container_name: lazylibrarian
+    environment:
+      - "PUID=${USER_ID}"
+      - "PGID=${GROUP_ID}"
+      - "FILE__PASSWORD=${TARGET_DIR}/secrets/password"
+      - DOCKER_MODS=linuxserver/calibre-web:calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
+    volumes:
+      - "${TARGET_DIR}/config/lazylibrarian:/config"
+      - "${TARGET_DIR}/downloads:/downloads"
+      - "${TARGET_DIR}:/books"
+    ports:
+      - 5299:5299
+    restart: always
+    networks:
+        - books

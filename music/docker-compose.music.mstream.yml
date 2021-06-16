@@ -1,0 +1,20 @@
+# mstream
+version: '3.3'
+
+services:
+  mstream:
+    image: ghcr.io/linuxserver/mstream
+    container_name: mstream
+    environment:
+      - "PUID=${USER_ID}"
+      - "PGID=${GROUP_ID}"
+      - TZ=Europe/London
+      - "FILE__PASSWORD=${TARGET_DIR}/secrets/password"
+    volumes:
+      - "${TARGET_DIR}/config/mstream:/config"
+      - "${TARGET_DIR}/downloads:/music"
+    ports:
+      - 3000:3000
+    restart: always
+    networks:
+        - music

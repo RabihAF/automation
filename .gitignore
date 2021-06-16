@@ -1,4 +1,9 @@
-config/
-downloads/
-media/
-secrets/
+media/media
+media/.env
+music/music
+music/.env
+books/books
+books/.env
+homer/assets/config-default.yml
+mediaOriginalConfigs/
+nfs/exports.txt

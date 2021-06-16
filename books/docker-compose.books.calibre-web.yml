@@ -1,0 +1,23 @@
+# Calibre-web is a web app providing a clean interface for browsing, reading and downloading eBooks using an existing Calibre database. 
+# It is also possible to integrate google drive and edit metadata and your calibre library through the app itself.
+version: '3.3'
+
+services:
+  calibre-web:
+    image: ghcr.io/linuxserver/calibre-web
+    container_name: calibre-web
+    environment:
+      - "PUID=${USER_ID}"
+      - "PGID=${GROUP_ID}"
+      - TZ=Europe/London
+      - "FILE__PASSWORD=${TARGET_DIR}/secrets/password"
+      - DOCKER_MODS=linuxserver/calibre-web:calibre
+    volumes:
+      - "${TARGET_DIR}/config/calibre-web:/config"
+      - "${TARGET_DIR}/downloads:/downloads"
+      - "${TARGET_DIR}:/books"
+    ports:
+      - 8083:8083
+    restart: always
+    networks:
+        - books

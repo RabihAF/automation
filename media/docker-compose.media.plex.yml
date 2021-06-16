@@ -1,0 +1,24 @@
+# Plex organizes video, music and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices.
+version: '3.3'
+
+services:
+  plex:
+    image: ghcr.io/linuxserver/plex
+    container_name: plex
+    environment:
+      - "PUID=${USER_ID}"
+      - "PGID=${GROUP_ID}"
+      - TZ=Europe/London
+      - "FILE__PASSWORD=${TARGET_DIR}/secrets/password"
+      - VERSION=docker # Let Docker handle the Plex Version, we keep our Dockerhub Endpoint up to date with the latest public builds. This is the same as leaving this setting out of your create command
+      - "PLEX_CLAIM=${PLEX_TOKEN}" #optional you can obtain a claim token from https://plex.tv/claim and input here. Keep in mind that the claim tokens expire within 4 minutes. If you have not already claimed your server (first time setup) you need to set PLEX_CLAIM to claim a server set up with bridge networking.
+    volumes:
+      - "${TARGET_DIR}/config/plex:/config"
+      - "${TARGET_DIR}/tvseries:/tv"
+      - "${TARGET_DIR}/movies:/movies"
+      - "${TARGET_DIR}/downloads:/downloads"
+    ports:
+      - 32400:32400
+    restart: always
+    networks:
+        - media

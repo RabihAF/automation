@@ -1,0 +1,22 @@
+# Radarr - A fork of Sonarr to work with movies
+version: '3.3'
+services:
+  radarr:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr
+    depends_on:
+      - "jackett"
+    environment:
+      - "PUID=${USER_ID}"
+      - "PGID=${GROUP_ID}"
+      - TZ=Europe/London
+      - "FILE__PASSWORD=${TARGET_DIR}/secrets/password"
+    volumes:
+      - "${TARGET_DIR}/config/radarr:/config"
+      - "${TARGET_DIR}/movies:/movies" #optional
+      - "${TARGET_DIR}/downloads:/downloads" #optional
+    ports:
+      - 7878:7878
+    restart: always
+    networks:
+        - media

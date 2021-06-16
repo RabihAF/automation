@@ -1,0 +1,25 @@
+# Bazarr is a companion application to Sonarr and Radarr. 
+# It can manage and download subtitles based on your requirements. 
+# You define your preferences by TV show or movie and Bazarr takes care of everything for you.
+version: '3.3'
+
+services:
+  bazarr:
+    image: ghcr.io/linuxserver/bazarr
+    container_name: bazarr
+    depends_on:
+      - "jackett"
+    environment:
+      - "PUID=${USER_ID}"
+      - "PGID=${GROUP_ID}"
+      - TZ=Europe/London
+      - "FILE__PASSWORD=${TARGET_DIR}/secrets/password"
+    volumes:
+      - "${TARGET_DIR}/config/bazarr:/config"
+      - "${TARGET_DIR}/tvseries:/tv" #optional
+      - "${TARGET_DIR}/movies:/movies" #optional
+    ports:
+      - 6767:6767 # Allows HTTP access to the internal webserver.
+    restart: always
+    networks:
+        - media

@@ -1,0 +1,20 @@
+# Synclounge is a third party tool that allows you to watch Plex in sync with your friends/family, wherever you are.
+version: '3.3'
+
+services:
+  synclounge:
+    image: ghcr.io/linuxserver/synclounge
+    container_name: synclounge
+    depends_on:
+      - "plex"
+    environment:
+      - "PUID=${USER_ID}"
+      - "PGID=${GROUP_ID}"
+      - TZ=Europe/London
+      - "FILE__PASSWORD=${TARGET_DIR}/secrets/password"
+      # - AUTH_LIST=plexuser1,plexuser2,email1,machineid1 #optional If set, only the users defined here and the users of the plex servers defined here will be able to access the server. Use e-mails, plex usernames and/or plex server machine ids, comma separated, no spaces.
+    ports:
+      - 8088:8088
+    restart: always
+    networks:
+        - media

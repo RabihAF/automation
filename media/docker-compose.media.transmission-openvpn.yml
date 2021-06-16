@@ -1,0 +1,29 @@
+# Transmission and openVPN
+version: '3.3'
+
+services:
+    transmission:
+      image: haugene/transmission-openvpn
+      container_name: transmission
+      cap_add:
+          - NET_ADMIN
+      environment:
+          - "OPENVPN_PROVIDER=${OPENVPN_PROVIDER_PROVIDED}"
+          - "OPENVPN_CONFIG=${OPENVPN_CONFIG_PROVIDED}"
+          - "OPENVPN_USERNAME=${OPENVPN_USERNAME_PROVIDED}"
+          - "OPENVPN_PASSWORD=${OPENVPN_PASSWORD_PROVIDED}"
+          - "LOCAL_NETWORK=${OPENVPN_LOCAL_NETWORK_PROVIDED}"
+      volumes:
+          - "${TARGET_DIR}/config/transmission:/config"
+          - "${TARGET_DIR}/downloads/data:/data"
+          - "${TARGET_DIR}/downloads/watch:/watch"
+          - "${TARGET_DIR}/downloads:/downloads"
+      logging:
+          driver: json-file
+          options:
+              max-size: 10m
+      ports:
+          - '9091:9091'
+      restart: always
+      networks:
+          - media
