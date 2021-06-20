@@ -1,6 +1,6 @@
 # automation
 
-## Books
+## IOT
 
 ### Prerequisites
 
@@ -8,10 +8,10 @@ docker-compose version 1.29.2 or above is required
 
 ### Deployment
 
-#### Initial setup configs and pull images
+#### Initial quick setup configs and pull images
 
 ```bash
-sudo chmod +x $PWD/init.sh && $PWD/init.sh "target directory path for configs and downloads"
+sudo chmod +x $PWD/init.sh && $PWD/init.sh "/mnt/sda1/"
 ```
 
 #### Run
@@ -32,5 +32,5 @@ $PWD/compose-execute.sh pull
 
 ### URL's
 
-- lazylibrarian: http://127.0.0.1:5299/home
-- calibre-web: http://127.0.0.1:8083
+- nodered: http://127.0.0.1:1880
+- homeassistant: http://127.0.0.1:8123

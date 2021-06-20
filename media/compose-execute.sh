@@ -27,6 +27,8 @@ main() {
         --file "${_dir}/docker-compose.media.overseerr.yml" \
         --file "${_dir}/docker-compose.media.plex.yml" \
         --file "${_dir}/docker-compose.media.synclounge.yml" \
+        --file "${_dir}/docker-compose.media.lazylibrarian.yml" \
+        --file "${_dir}/docker-compose.media.calibre-web.yml" \
         ${_compose_command}
     
     return $?

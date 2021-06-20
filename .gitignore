@@ -1,9 +1,8 @@
 media/media
-media/.env
+media/.env*
 music/music
-music/.env
-books/books
-books/.env
+music/.env*
+iot/iot
+iot/.env*
 homer/assets/config-default.yml
 mediaOriginalConfigs/
-nfs/exports.txt

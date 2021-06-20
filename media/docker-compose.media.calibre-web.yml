@@ -15,9 +15,9 @@ services:
     volumes:
       - "${TARGET_DIR}/config/calibre-web:/config"
       - "${TARGET_DIR}/downloads:/downloads"
-      - "${TARGET_DIR}:/books"
+      - "${TARGET_DIR}/books:/books"
     ports:
       - 8083:8083
     restart: always
     networks:
-        - books
+        - media

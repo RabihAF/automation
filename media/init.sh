@@ -54,9 +54,12 @@ main() {
          "${_target_dir}/config/jackett" \
          "${_target_dir}/config/overseerr" \
          "${_target_dir}/config/plex" \
+         "${_target_dir}/config/lazylibrarian" \
+         "${_target_dir}/config/calibre-web" \
          "${_target_dir}/downloads/watch" \
          "${_target_dir}/downloads/data" \
          "${_target_dir}/tvseries" \
+         "${_target_dir}/books" \
          "${_target_dir}/movies" 
 
     sudo chmod +x ${_script_dir}/compose-execute.sh

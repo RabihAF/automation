@@ -15,9 +15,9 @@ services:
     volumes:
       - "${TARGET_DIR}/config/lazylibrarian:/config"
       - "${TARGET_DIR}/downloads:/downloads"
-      - "${TARGET_DIR}:/books"
+      - "${TARGET_DIR}/books:/books"
     ports:
       - 5299:5299
     restart: always
     networks:
-        - books
+        - media

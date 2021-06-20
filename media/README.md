@@ -40,6 +40,8 @@ $PWD/compose-execute.sh pull
 - overseerr: http://127.0.0.1:5055
 - plex: http://127.0.0.1:32400/web
 - synclounge: http://127.0.0.1:8088
+- lazylibrarian: http://127.0.0.1:5299/home
+- calibre-web: http://127.0.0.1:8083
 
 
 ### Include VPN Setup

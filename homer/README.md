@@ -4,6 +4,15 @@
 
 ### Commands
 
+Reset any changes and overwrite the localhost ip address
+
+```bash
+git reset --hard origin/master; \
+git fetch; \
+sudo chmod +x $PWD/setIP.sh && \
+$PWD/setIP.sh "ip address of the server or leave empty to default to the private IP"
+```
+
 ```bash
 docker run --detach \
    --env "UID=$(id -u)" \

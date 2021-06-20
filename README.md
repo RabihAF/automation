@@ -2,7 +2,6 @@
 
  - media
  - music
- - books
  - homer
- - nfs
  - portainer
+ - iot

@@ -1,0 +1,14 @@
+# Nodered - Low-code programming for event-driven applications 
+version: '3.3'
+
+services:
+  nodered:
+    image: nodered/node-red
+    container_name: nodered
+    volumes:
+      - "${TARGET_DIR}/data/nodered:/data"
+    ports:
+      - 1880:1880
+    restart: always
+    networks:
+        - iot
