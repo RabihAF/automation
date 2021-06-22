@@ -11,7 +11,7 @@ docker-compose version 1.29.2 or above is required
 #### Initial quick setup configs and pull images
 
 ```bash
-sudo chmod +x $PWD/init.sh && $PWD/init.sh "/mnt/sda1/"
+sudo chmod +x $PWD/init.sh && $PWD/init.sh "target directory path for configs and downloads" "mqtt_username" "mqtt_password"
 ```
 
 #### Run
@@ -34,3 +34,18 @@ $PWD/compose-execute.sh pull
 
 - nodered: http://127.0.0.1:1880
 - homeassistant: http://127.0.0.1:8123
+
+to create a password file for mqtt (optional, this is already done in the init script):
+
+```bash
+USER="user"; \
+PASSWORD="password"; \
+LOCAL_DIR="."; \
+FILE_NAME="passwd"; \
+docker run --rm --entrypoint /bin/sh eclipse-mosquitto \
+-c "touch '$FILE_NAME' && \
+ printf '$PASSWORD\n$PASSWORD\n' | mosquitto_passwd -c '$FILE_NAME' '$USER' > /dev/null && \
+ cat '$FILE_NAME'" > ${LOCAL_DIR}/${FILE_NAME}; \
+unset USER PASSWORD LOCAL_DIR FILE_NAME; \
+history -d $(history 1);
+```
