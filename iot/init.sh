@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 set -o pipefail
@@ -8,6 +7,8 @@ readonly _script_dir="$(cd "$(dirname "${0}")" && pwd)"
 readonly _target_dir="${1:-"$_script_dir"}/iot"
 readonly _mqtt_user="${2:-"user"}"
 readonly _mqtt_password="${3:-"password"}"
+readonly _enable_ssl="${4:-false}"
+readonly _certs_dir="${5:-"/etc/ssl/certs"}"
 
 setup_mosquitto_conf_file() {
     local -r __config_file="${1}"
@@ -16,12 +17,34 @@ setup_mosquitto_conf_file() {
     mv "${__config_file}" "${__config_file}.$(date +%s)" 2> /dev/null
 
     # create config file
-    cat <<EOF >"${__config_file}"
-listener 1883
+    if test "${_enable_ssl}" = true; then
+        cat <<EOF >"${__config_file}"
 allow_anonymous false
 password_file /etc/mosquitto/passwd
 
+listener 1883 localhost
+
+listener 8883
+certfile /etc/mosquitto/certs/server.crt
+cafile /etc/mosquitto/certs/ca.crt
+keyfile /etc/mosquitto/certs/server.key
+
+listener 9001
+protocol websockets
+certfile /etc/mosquitto/certs/server.crt
+cafile /etc/mosquitto/certs/ca.crt
+keyfile /etc/mosquitto/certs/server.key
+
 EOF
+    else
+        cat <<EOF >"${__config_file}"
+allow_anonymous false
+password_file /etc/mosquitto/passwd
+
+listener 1883
+
+EOF
+    fi
 
     return $?
 }
@@ -52,6 +75,7 @@ setup_config_file() {
     # create config file
     cat <<EOF >"${__config_file}"
 TARGET_DIR=${_target_dir}
+CERTS_DIR=${_certs_dir}
 
 EOF
 

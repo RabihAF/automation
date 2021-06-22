@@ -6,3 +6,4 @@ iot/iot
 iot/.env*
 homer/assets/config-default.yml
 mediaOriginalConfigs/
+.commands

@@ -10,8 +10,21 @@ docker-compose version 1.29.2 or above is required
 
 #### Initial quick setup configs and pull images
 
+Unencrypted MQTT
+
 ```bash
 sudo chmod +x $PWD/init.sh && $PWD/init.sh "target directory path for configs and downloads" "mqtt_username" "mqtt_password"
+```
+
+MQTT over SSL
+
+The certs are to be called:
+certfile: server.crt
+cafile: ca.crt
+keyfile: server.key
+
+```bash
+sudo chmod +x $PWD/init.sh && $PWD/init.sh "target directory path for configs and downloads" "mqtt_username" "mqtt_password" true "certs directory path"
 ```
 
 #### Run

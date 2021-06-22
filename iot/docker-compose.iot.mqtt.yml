@@ -10,9 +10,11 @@ services:
       - "${TARGET_DIR}/config/mosquitto/passwd:/etc/mosquitto/passwd"
       - "${TARGET_DIR}/data/mosquitto:/mosquitto/data"
       - "${TARGET_DIR}/log/mosquitto:/mosquitto/log"
+      - "${CERTS_DIR}:/etc/mosquitto/certs"
     ports:
       - 1883:1883 # expect MQTT packets
       - 9001:9001 # expect HTTP/Websocket protocol, client could be run from a web browser
+      - 8883:8883 # MQTT over SSL
     restart: always
     networks:
         - iot
