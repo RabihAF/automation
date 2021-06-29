@@ -4,6 +4,7 @@ music/music
 music/.env*
 iot/iot
 iot/.env*
+letsencrypt
 homer/assets/config-default.yml
 mediaOriginalConfigs/
 .commands

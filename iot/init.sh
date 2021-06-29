@@ -22,7 +22,7 @@ setup_mosquitto_conf_file() {
 allow_anonymous false
 password_file /etc/mosquitto/passwd
 
-listener 1883 localhost
+listener 1883
 
 listener 8883
 certfile /etc/mosquitto/certs/server.crt
@@ -60,8 +60,6 @@ setup_mosquitto_password_file() {
     -c "touch passwd && \
      printf '$_mqtt_password\n$_mqtt_password\n' | mosquitto_passwd -c passwd '$_mqtt_user' > /dev/null && \
      cat passwd" > ${__password_file};
-
-EOF
 
     return $?
 }
